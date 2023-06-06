@@ -19,38 +19,39 @@ import com.qa.opencart.frameworkexception.FrameException;
 
 public class DriverFactory {
 
+	
 	WebDriver driver;
 	OptionsManager optionsManager;
 	public static String highlightElement;
-	
+
 	public static ThreadLocal<WebDriver> tlDriver = new ThreadLocal<WebDriver>();
 
 	public WebDriver initDriver(Properties prop) {
 		String browserName = prop.getProperty("browser").trim();
-		
-		//String browserName = System.getProperty("browser");
-		
+
+		// String browserName = System.getProperty("browser");
+
 		System.out.println("browser name is : " + browserName);
-		
+
 		highlightElement = prop.getProperty("highlight");
-		
+
 		optionsManager = new OptionsManager(prop);
 
 		switch (browserName.toLowerCase()) {
 		case "chrome":
-			//driver = new ChromeDriver(optionsManager.getChromeOptions());
+			// driver = new ChromeDriver(optionsManager.getChromeOptions());
 			tlDriver.set(new ChromeDriver(optionsManager.getChromeOptions()));
 			break;
 		case "edge":
-			//driver = new EdgeDriver(optionsManager.getEdgeOptions());
+			// driver = new EdgeDriver(optionsManager.getEdgeOptions());
 			tlDriver.set(new EdgeDriver(optionsManager.getEdgeOptions()));
 			break;
 		case "safari":
-			//driver = new SafariDriver();
+			// driver = new SafariDriver();
 			tlDriver.set(new SafariDriver());
 			break;
 		case "firefox":
-			//driver = new FirefoxDriver(optionsManager.getFirefoxOptions());
+			// driver = new FirefoxDriver(optionsManager.getFirefoxOptions());
 			tlDriver.set(new FirefoxDriver(optionsManager.getFirefoxOptions()));
 			break;
 
@@ -65,12 +66,11 @@ public class DriverFactory {
 		return getDriver();
 
 	}
-	
-	//return the thread local copy of the driver
+
+	// return the thread local copy of the driver
 	public synchronized static WebDriver getDriver() {
 		return tlDriver.get();
 	}
-	
 
 	public Properties initProp() {
 
@@ -124,9 +124,7 @@ public class DriverFactory {
 		return prop;
 
 	}
-	
-	
-	
+
 	/**
 	 * take screenshot
 	 */
@@ -134,7 +132,7 @@ public class DriverFactory {
 		File srcFile = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.FILE);
 		String path = System.getProperty("user.dir") + "/screenshot/" + System.currentTimeMillis() + ".png";
 		File destination = new File(path);
-		
+
 		try {
 			FileUtils.copyFile(srcFile, destination);
 		} catch (IOException e) {
@@ -143,7 +141,5 @@ public class DriverFactory {
 
 		return path;
 	}
-	
-	
 
 }
