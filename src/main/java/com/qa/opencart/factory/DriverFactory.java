@@ -74,7 +74,7 @@ public class DriverFactory {
 
 	public Properties initProp() {
 
-		// mvn clean install -Denv="qa" -- cmd line, jenkins
+		// mvn clean install -Denv="stage" -- cmd line, jenkins
 		// mvn clean install
 		Properties prop = new Properties();
 		FileInputStream ip = null;
