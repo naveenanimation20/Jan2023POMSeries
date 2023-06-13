@@ -27,6 +27,15 @@ public class OptionsManager {
 			co.addArguments("--incognito");
 		}
 		
+		if(Boolean.parseBoolean(prop.getProperty("remote"))){
+			co.setCapability("browserName", "chrome");
+			co.setBrowserVersion(prop.getProperty("browserversion"));
+			//co.setCapability("enableVNC", true);
+		}
+		
+		
+		
+		
 //		co.addArguments("--window-size=1920,1080");
 //		co.addArguments("--no-sandbox");
 //		co.addArguments("--disable-gpu");
@@ -52,6 +61,15 @@ public class OptionsManager {
 		if(Boolean.parseBoolean(prop.getProperty("incognito"))) {
 			fo.addArguments("--incognito");
 		}
+		
+		
+		if(Boolean.parseBoolean(prop.getProperty("remote"))){
+			fo.setCapability("browserName", "firefox");
+			fo.setBrowserVersion(prop.getProperty("browserversion"));
+			//fo.setCapability("enableVNC", true);
+		}
+		
+		
 		return fo;
 	}
 	
